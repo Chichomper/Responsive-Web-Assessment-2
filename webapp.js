@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose'); // 1. Import Mongoose
+const mongoose = require('mongoose'); // Imports Mongoose, the one that helps with interacting with MongoDB
 const app = express();
 const port = 3000;
 
@@ -9,7 +9,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/myPortfolio')
     .then(() => console.log('Connected to MongoDB!'))
     .catch(err => console.error('Could not connect...', err));
 
-// 3. Define a "Schema" (The structure of your art data)
+// Defines a "Schema" (The structure of the art data)
 const artSchema = new mongoose.Schema({
     title: String,
     imageUrl: String,
@@ -18,7 +18,7 @@ const artSchema = new mongoose.Schema({
 
 const Art = mongoose.model('Art', artSchema);
 
-// 4. Create an API route to get art from the database
+// Creates an route to get art from the database
 app.get('/api/art', async (req, res) => {
     const artworks = await Art.find();
     res.json(artworks);
