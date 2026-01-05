@@ -6,6 +6,37 @@
     <link rel="stylesheet" href="A2.css" type="text/css" />
     <title>Assessment 2</title>
 </head>
+<script>
+    async function loadGallery() {
+        try {
+            // 1. Fetch the data from your Node server
+            const response = await fetch('/api/art');
+            const artworks = await response.json();
+
+            const gallery = document.getElementById('art-gallery');
+            gallery.innerHTML = ''; // Clear the loading text
+
+            // 2. Loop through the data from MongoDB
+            artworks.forEach(art => {
+                const imgElement = document.createElement('img');
+                imgElement.src = art.imageUrl;
+                imgElement.alt = art.description;
+                imgElement.title = art.title;
+                imgElement.className = 'artwork';
+                imgElement.width = 400;
+                imgElement.height = 450;
+
+                gallery.appendChild(imgElement);
+            });
+        } catch (error) {
+            console.error('Error loading gallery:', error);
+        }
+    }
+
+    // Run the function when the page loads
+    window.onload = loadGallery;
+</script>
+
 <body>
 
     <ul class="nav">
@@ -44,34 +75,11 @@
     </div>
 
     <div id="me3" class="section-container">
-        <h1 class="Heading">Heres some of my art</h1>
-            <img
-        src="Example.png"
-        alt="Why is this not working"
-        width="400"
-        height="450"
-        title="Image of one of my characters"
-        class="artwork"
-        />
-
-         <img
-        src="Example2.png"
-        alt="Why is this not working"
-        width="400"
-        height="450"
-        title="Image of one of my characters"
-        class="artwork"
-        />
-
-         <img
-        src="Example3.png"
-        alt="Why is this not working"
-        width="400"
-        height="450"
-        title="Image of one of my fanmade pokemon"
-        class="artwork"
-        />
+    <h1 class="Heading">Heres some of my art</h1>
+    <div id="art-gallery" class="gallery-grid">
+        <p>Loading my masterpieces...</p>
     </div>
+</div>
 
     <div id="works" class="section-container">
         <h1 class="Heading">Thats all folks!</h1>
