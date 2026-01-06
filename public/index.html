@@ -9,14 +9,14 @@
 <script>
     async function loadGallery() {
         try {
-            // 1. Fetch the data from your Node server
+            // Fetch the data from your Node server
             const response = await fetch('/api/art');
             const artworks = await response.json();
 
             const gallery = document.getElementById('art-gallery');
-            gallery.innerHTML = ''; // Clear the loading text
+            gallery.innerHTML = ''; // Clears the loading text
 
-            // 2. Loop through the data from MongoDB
+            // Loops through the data from MongoDB
             artworks.forEach(art => {
                 const imgElement = document.createElement('img');
                 imgElement.src = art.imageUrl;
